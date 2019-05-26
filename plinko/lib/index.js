@@ -1,8 +1,3 @@
-//////////////////////////////////////////
-// Hi!
-// You probably don't need to edit me
-//////////////////////////////////////////
-
 const BALL_SIZE = 16;
 const CANVAS_HEIGHT = 600;
 const CANVAS_WIDTH = 794;
@@ -19,7 +14,7 @@ const COLORS = [
   '#039be5',
   '#0288d1',
   '#0277bd',
-  '#01579b'
+  '#01579b',
 ];
 
 const Engine = Matter.Engine,
@@ -30,7 +25,7 @@ const Engine = Matter.Engine,
   Body = Matter.Body;
 
 const engine = Engine.create({
-  timing: { timeScale: 2 }
+  timing: { timeScale: 2 },
 });
 const render = Render.create({
   element: document.querySelector('.target'),
@@ -39,8 +34,8 @@ const render = Render.create({
     width: CANVAS_WIDTH,
     height: CANVAS_HEIGHT,
     wireframes: false,
-    background: '#f1f1f1'
-  }
+    background: '#f1f1f1',
+  },
 });
 
 const ground = Bodies.rectangle(
@@ -51,17 +46,17 @@ const ground = Bodies.rectangle(
   {
     id: 999,
     isStatic: true,
-    collisionFilter: { group: 'ground' }
+    collisionFilter: { group: 'ground' },
   }
 );
 const ground2 = Bodies.rectangle(0, CANVAS_HEIGHT, CANVAS_WIDTH * 3, 50, {
   id: 9999,
   isStatic: true,
-  collisionFilter: { group: 'ground' }
+  collisionFilter: { group: 'ground' },
 });
 const indicator = Bodies.circle(BALL_SIZE, BALL_SIZE, BALL_SIZE, {
   isStatic: true,
-  collisionFilter: { group: 'ball' }
+  collisionFilter: { group: 'ball' },
 });
 
 const pegs = [];
@@ -75,7 +70,7 @@ for (let i = 1; i < CANVAS_HEIGHT / PEG_Y - 1; i++) {
     }
 
     const peg = Bodies.polygon(x, y, 7, BALL_SIZE / 4, {
-      isStatic: true
+      isStatic: true,
     });
     pegs.push(peg);
   }
@@ -87,7 +82,7 @@ const leftWall = Bodies.rectangle(
   1,
   CANVAS_HEIGHT,
   {
-    isStatic: true
+    isStatic: true,
   }
 );
 const rightWall = Bodies.rectangle(
@@ -96,7 +91,7 @@ const rightWall = Bodies.rectangle(
   1,
   CANVAS_HEIGHT,
   {
-    isStatic: true
+    isStatic: true,
   }
 );
 
@@ -115,11 +110,11 @@ for (let i = 0; i < 10; i++) {
       isStatic: true,
       isSensor: true,
       render: {
-        fillStyle: BUCKET_COLOR
+        fillStyle: BUCKET_COLOR,
       },
       collisionFilter: {
-        group: 'bucket'
-      }
+        group: 'bucket',
+      },
     }
   );
   const divider = Bodies.rectangle(
@@ -129,7 +124,7 @@ for (let i = 0; i < 10; i++) {
     bucketHeight,
     {
       isStatic: true,
-      collisionFilter: { group: 'bucket' }
+      collisionFilter: { group: 'bucket' },
     }
   );
   bucketIdRange.push(i);
@@ -144,7 +139,7 @@ World.add(engine.world, [
   ground,
   indicator,
   leftWall,
-  rightWall
+  rightWall,
 ]);
 Engine.run(engine);
 Render.run(render);
@@ -176,7 +171,7 @@ function dropBalls(position, quantity) {
     const ball = Bodies.circle(dropX, size, size, {
       restitution,
       collisionFilter: { group: 'ball' },
-      friction: 0.9
+      friction: 0.9,
     });
     ball.size = size;
     ball.restitution = restitution;
@@ -200,7 +195,7 @@ const events = {
     const quantity = parseInt(document.querySelector('#drop-quantity').value);
 
     dropBalls(x, quantity);
-  }
+  },
 };
 for (let event in events) {
   canvas.addEventListener(event, events[event]);
