@@ -11,7 +11,7 @@ function runAnalysis() {
     return Math.abs(point - PREDICTION_POINT);
   }
 
-  const bucket = outputs
+  const bucket = _.chain(outputs)
     .map(row => [distance(row[0]), row[3]])
     .sortBy(row => row[0])
     // get closest vals
